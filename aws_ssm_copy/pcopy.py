@@ -7,14 +7,6 @@ from botocore.exceptions import ClientError
 
 
 def rename_parameter(parameter, source_path, target_path):
-    """
-    >>> rename_parameter({'Name':'/old-root/my-param'}, '/old-root', '/new-root')
-    {'Name': '/new-root/my-param'}
-    >>> rename_parameter({'Name':'/old-root/my-param'}, '/invalid-root', '/new-root')
-    {'Name': '/old-root/my-param'}
-    >>> rename_parameter({'Name':'/old-root/my-param'}, '/old-root', None)
-    {'Name': '/old-root/my-param'}
-    """
     result = parameter.copy()
     if target_path is not None:
         result["Name"] = re.sub(r"^" + source_path, target_path, parameter["Name"])
